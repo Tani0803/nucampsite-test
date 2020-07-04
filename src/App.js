@@ -1,8 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
-
-function App() {
+import Directory from './components/DirectoryComponent';
+import { CAMPSITES } from './shared/campsites';
+/*function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +22,28 @@ function App() {
       </header>
     </div>
   );
+}
+*/
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+       campsites : CAMPSITES
+
+    };
+}
+  render() {
+      return (
+          <div className="App">
+              <Navbar dark color="primary">
+              <div className="container">
+                  <NavbarBrand href="/">NuCamp</NavbarBrand>
+              </div>
+              </Navbar>
+              <Directory campsites={this.state.campsites} />
+          </div>
+      );
+  }
 }
 
 export default App;
