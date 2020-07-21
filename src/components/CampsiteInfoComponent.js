@@ -4,6 +4,7 @@ import { Button, Card, CardImg, CardText, CardBody,  Breadcrumb, BreadcrumbItem,
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 //const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
@@ -26,7 +27,7 @@ function RenderCampsite({campsite}) {
     return (
         <div className="col-md-5 m-1">
             <Card>
-                <CardImg top src={campsite.image} alt={campsite.name} />
+                <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
                 <CardBody>
                     <CardText>{campsite.description}</CardText>
                 </CardBody>
@@ -36,7 +37,7 @@ function RenderCampsite({campsite}) {
 }
 
 
-function RenderComments({comments, addComment, campsiteId}) {
+function RenderComments({comments, postComment, campsiteId}) {
     if (comments) {
         return (
             <div className="col-md-5 m-1">
@@ -49,7 +50,7 @@ function RenderComments({comments, addComment, campsiteId}) {
                         </div>
                     </div>
                 ))}
-                <CommentForm campsiteId={campsiteId} addComment={addComment} />
+                <CommentForm campsiteId={campsiteId} postComment={postComment} />
             </div>
         );
     }
@@ -98,7 +99,7 @@ function CampsiteInfo(props) {
                     <RenderCampsite campsite={props.campsite} />
                     <RenderComments 
                         comments={props.comments}
-                        addComment={props.addComment}
+                        postComment={props.postComment}
                         campsiteId={props.campsite.id}
                     />
                 </div>
@@ -134,7 +135,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
+        this.props.postComment(this.props.campsiteId, values.rating, values.author, values.text);
     }
 
     render() {
