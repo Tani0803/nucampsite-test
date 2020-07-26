@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-//import { Navbar, NavbarBrand } from 'reactstrap';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
-//import { CAMPSITES } from '../shared/campsites';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Contact from './ContactComponent';
-//import { COMMENTS } from '../shared/comments';
-//import { PARTNERS } from '../shared/partners';
-//mport { PROMOTIONS } from '../shared/promotions';
 import About from './AboutComponent';
 import { postComment, fetchCampsites, fetchComments, fetchPromotions, fetchPartners, postFeedback } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
@@ -29,7 +24,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text)),
-   // addComment: (campsiteId, rating, author, text) => (addComment(campsiteId, rating, author, text)),
     fetchCampsites: () => (fetchCampsites()),
     resetFeedbackForm: () => (actions.reset('feedbackForm')),
     fetchComments: () => (fetchComments()),
@@ -65,7 +59,6 @@ class Main extends Component {
                     partnerLoading={this.props.partners.isLoading}
                     partnerErrMess={this.props.partners.errMess}
                     
-                    //partner={this.props.partners.filter(partner => partner.featured)[0]}
                 />
             );
         }

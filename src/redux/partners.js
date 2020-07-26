@@ -5,7 +5,6 @@ export const Partners = (state = {
         isLoading: true,
         errMess: null,
         partners: []
-
     }, action) => {
     switch (action.type) {
         case ActionTypes.ADD_PARTNERS:

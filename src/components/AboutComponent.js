@@ -3,7 +3,45 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+import { Fade, Stagger } from 'react-animation-components';
+
+function PartnerList(props) {
+    const partners = props.partners.partners.map(partner => {
+        return (
+            <Fade in key={partner.id} >
+                <Media tag="li" >
+                        <RenderPartner partner={partner} />
+                </Media>
+            </Fade>
+        );
+    });
+	
+    if (props.partners.isLoading) {
+        return <Loading />;
+    }
+
+    if (props.partners.errMess) {
+        return (
+            <div className="col">
+                <h4>{props.partners.errMess}</h4>
+            </div>
+        );
+    }
+
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col">	
+                    <Media list>
+                        <Stagger in>
+                            {partners}
+                        </Stagger> 
+                    </Media>   
+                </div>
+            </div>  
+        </div>        
+    );
+}
 
 function RenderPartner({partner}) {
     if(partner) {
@@ -21,61 +59,6 @@ function RenderPartner({partner}) {
     }
     return <div />;
 }
-
-function PartnerList(props) {
-	
-    const partners = props.partners.partners.map(partner => {
-       
-            return (
-                <Fade in key={partner.id} >
-                    <Media tag="li" >
-                            <RenderPartner partner={partner} />
-                    </Media>
-                </Fade>
-            );
-    });
-	
-    if (props.partners.isLoading) {
-        return (
-            <div className="container">
-                <div className="row">
-                    <Loading />
-                </div>
-            </div>
-        );
-    }
-
-    if (props.partners.errMess) {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <h4>{props.partners.errMess}</h4>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-   
-    return (
-            <div className="container">
-                <div className="row">
-                    <div className="col">	
-                        <Stagger in>
-                            <Media list>
-                                {partners}
-                            </Media>
-                        </Stagger>    
-                    </div>
-                </div>
-            </div>
-    );
-    
-  
-}
-
-
 
 function About(props) {
 

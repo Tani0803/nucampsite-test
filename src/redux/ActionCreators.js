@@ -46,7 +46,8 @@ export const fetchComments = () => dispatch => {
             if (response.ok) {
                 return response;
             } else {
-                const error = new Error(`Error ${response.status}: ${response.statusText}`); error.response = response;
+                const error = new Error(`Error ${response.status}: ${response.statusText}`); 
+                error.response = response;
                 throw error;
             }
         },
@@ -112,7 +113,7 @@ export const postComment = (campsiteId, rating, author, text) => dispatch => {
         });
 };
 
-export const fetchPromotions = () => (dispatch) => {
+export const fetchPromotions = () => dispatch => {
     
     dispatch(promotionsLoading());
 
@@ -152,15 +153,16 @@ export const addPromotions = promotions => ({
 
 
 //
-export const fetchPartners = () => dispatch => {
+export const fetchPartners = () => (dispatch) => {
     dispatch(partnersLoading());
 
-    return fetch(baseUrl + 'partners')
+    return fetch(baseUrl + "partners")
     .then(response => {
             if (response.ok) {
                  return response;
             } else {
-                const error = new Error(`Error ${response.status}: ${response.statusText}`);  error.response = response;
+                const error = new Error(`Error ${response.status}: ${response.statusText}`); 
+                error.response = response;
                 throw error;
             }
         },
@@ -203,7 +205,7 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
        
     };
 
-    newFeedback.date = new Date().toISOString();
+    //newFeedback.date = new Date().toISOString();
 
     return fetch(baseUrl + 'feedback', {
             method: "POST",
